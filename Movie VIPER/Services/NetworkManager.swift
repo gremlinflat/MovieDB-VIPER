@@ -7,20 +7,25 @@
 import Foundation
 
 class NetworkManager: NSObject {
-    var endPointManager: EndPointManager?
+    var endPointManager: EndPointManager
+    
+    init(endPointManager: EndPointManager) {
+        self.endPointManager = endPointManager
+    }
     
     func createRequest(for endPoint: EndPoints, with completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         self.endPointManager = EndPointManager(for: endPoint)
         
         //TODO: SHOW NEGATIVE ALERT
-        guard let url = URL(string: endPointManager!.getURL()) else { return }
+        guard let url = URL(string: endPointManager.getURL()) else { return }
         
         let task = createTask(url: url, completion: completion)
         
         task.resume()
         
     }
-    private func createTask(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionTask {
+    
+    fileprivate func createTask(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionTask {
         return URLSession.shared.dataTask(with: url) { data, response, error in
             DispatchQueue.main.async { completion(data, response, error) }
         }
