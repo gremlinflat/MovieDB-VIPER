@@ -14,7 +14,7 @@
 		BED9D72928DC94A0003E7B84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED9D72728DC94A0003E7B84 /* LaunchScreen.storyboard */; };
 		BED9D75128DCEC0B003E7B84 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D75028DCEC0B003E7B84 /* NetworkManager.swift */; };
 		BED9D75328DCEC1A003E7B84 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D75228DCEC1A003E7B84 /* Secrets.swift */; };
-		BED9D75728DD3D1B003E7B84 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D75628DD3D1B003E7B84 /* EndPoints.swift */; };
+		BED9D75728DD3D1B003E7B84 /* EndPointManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D75628DD3D1B003E7B84 /* EndPointManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		BED9D72A28DC94A0003E7B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BED9D75028DCEC0B003E7B84 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BED9D75228DCEC1A003E7B84 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
-		BED9D75628DD3D1B003E7B84 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
+		BED9D75628DD3D1B003E7B84 /* EndPointManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,7 @@
 				BED9D71E28DC949E003E7B84 /* SceneDelegate.swift */,
 				BED9D72028DC949E003E7B84 /* ViewController.swift */,
 				BED9D75828DD3D65003E7B84 /* Services */,
-				BED9D75228DCEC1A003E7B84 /* Secrets.swift */,
+				BED9D75928DD4DAD003E7B84 /* Helpers */,
 				BED9D72528DC94A0003E7B84 /* Assets.xcassets */,
 				BED9D72728DC94A0003E7B84 /* LaunchScreen.storyboard */,
 				BED9D72A28DC94A0003E7B84 /* Info.plist */,
@@ -76,9 +76,17 @@
 			isa = PBXGroup;
 			children = (
 				BED9D75028DCEC0B003E7B84 /* NetworkManager.swift */,
-				BED9D75628DD3D1B003E7B84 /* EndPoints.swift */,
+				BED9D75628DD3D1B003E7B84 /* EndPointManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		BED9D75928DD4DAD003E7B84 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BED9D75228DCEC1A003E7B84 /* Secrets.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,7 +163,7 @@
 				BED9D75328DCEC1A003E7B84 /* Secrets.swift in Sources */,
 				BED9D72128DC949E003E7B84 /* ViewController.swift in Sources */,
 				BED9D71D28DC949E003E7B84 /* AppDelegate.swift in Sources */,
-				BED9D75728DD3D1B003E7B84 /* EndPoints.swift in Sources */,
+				BED9D75728DD3D1B003E7B84 /* EndPointManager.swift in Sources */,
 				BED9D71F28DC949E003E7B84 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
