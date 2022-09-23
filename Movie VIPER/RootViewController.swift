@@ -7,13 +7,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RootViewController: UIViewController, BaseViewProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemRed
+        navigationController?.pushViewController(DetailMovieViewController(), animated: true)
     }
-
+    
 
 }
 

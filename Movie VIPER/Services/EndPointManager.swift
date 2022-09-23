@@ -17,11 +17,14 @@ enum EndPoints {
     case movieList(String, Int)
     case movieDetails(String)
     case movieVideo(String)
+    case imageAsset(String)
 }
 
 class EndPointManager: EndPointProtocol {
-    
+    //TODO: REFACTOR LATER
     let baseURL = "https://api.themoviedb.org/3"
+    let baseImageURL = "https://image.tmdb.org/t/p/original"
+    
     var path: String
     var args: [String : String]
     
@@ -43,6 +46,9 @@ class EndPointManager: EndPointProtocol {
         case .movieVideo(_):
             // TODO: UPDATE LATER
             fatalError()
+        case .imageAsset(let imgPath):
+            path = "\(baseImageURL)\(imgPath)"
+            args = [:]
         }
     }
     

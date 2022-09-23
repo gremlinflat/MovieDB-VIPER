@@ -19,9 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
         
-        let home = ViewController()
-        
-        window?.rootViewController = home
+        window?.rootViewController = MovieBuilder.build()
         window?.makeKeyAndVisible()
     }
 
