@@ -8,6 +8,8 @@
 import Foundation
 
 struct MovieEntity: Codable {
+    let id: String
+    
     let title: String
     let overview: String
     let tagline: String

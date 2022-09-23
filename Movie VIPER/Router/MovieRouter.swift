@@ -19,7 +19,7 @@ class MovieRouter: RouterProtocol {
     }
     
     func navigateToMovieDetail(for id: String) {
-        let vc = DetailMovieViewController()
+        let vc = UIStoryboard.init(name: "DetailMovie", bundle: nil).instantiateViewController(withIdentifier: "DetailMovieScene") as! DetailMovieViewController
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     

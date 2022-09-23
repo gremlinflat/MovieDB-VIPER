@@ -7,29 +7,30 @@
 
 import Foundation
 
-protocol EndPointProtocol {
-    var path: String { get }
-    var args: [String:String] { get }
-    func getURL() -> String
-}
-
 enum EndPoints {
+    case genre
     case movieList(String, Int)
     case movieDetails(String)
     case movieVideo(String)
     case imageAsset(String)
 }
 
-class EndPointManager: EndPointProtocol {
+class EndPointFactory {
+    
+    static let shared: EndPointFactory = EndPointFactory()
+    
+    private init() { }
+    
     //TODO: REFACTOR LATER
     let baseURL = "https://api.themoviedb.org/3"
     let baseImageURL = "https://image.tmdb.org/t/p/original"
     
-    var path: String
-    var args: [String : String]
+    var path: String?
+    var args: [String : String]?
     
-    init(for endPoint: EndPoints) {
+    func configure(for endPoint: EndPoints) -> String{
         switch endPoint {
+            
         case .movieList(let genre, let page):
             path = "/discover/movie"
             args = [
@@ -38,25 +39,39 @@ class EndPointManager: EndPointProtocol {
                 "with_genres" : genre,
                 "page" : "\(page)"
             ]
+            
         case .movieDetails(let id):
             path = "/discover/movie/\(id)"
             args = [
                 "language" : "en-US"
             ]
+            
         case .movieVideo(_):
             // TODO: UPDATE LATER
             fatalError()
+            
         case .imageAsset(let imgPath):
             path = "\(baseImageURL)\(imgPath)"
             args = [:]
+            
+        case .genre:
+            path = "\(baseURL)/genre/movie/list"
+            args = [
+                "language" : "en-US"
+            ]
+            
         }
+        return getURL()
     }
+    
     
     func getURL() -> String {
         var flattenArgs: String = ""
-        args.forEach { key, value in
+        args!.forEach { key, value in
             flattenArgs += "&\(key)=\(value)"
         }
-        return "\(baseURL)\(path)?\(SECRETS.movieApiKey)\(flattenArgs)"
+
+        
+        return "\(path!)?api_key=\(SECRETS.movieApiKey)\(flattenArgs)"
     }
 }

@@ -8,15 +8,20 @@
 import UIKit
 
 class MoviePresenter: PresenterProtocol{
-    var baseView: UIViewController
+
+    
+    var baseView: ViewProtocol
     var interactor: InteractorProtocol
     var route: RouterProtocol
     
-    init(baseView: UIViewController, interactor: InteractorProtocol, route: RouterProtocol) {
+    init(baseView: ViewProtocol, interactor: InteractorProtocol, route: RouterProtocol) {
         self.baseView = baseView
         self.interactor = interactor
         self.route = route
     }
     
+    func fetchGenres() {
+        interactor.reFetchData(kind: .genre)
+    }
 }
 

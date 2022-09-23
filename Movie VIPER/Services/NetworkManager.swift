@@ -5,19 +5,51 @@
 //  Created by Fahri Novaldi on 23/09/22.
 //
 import Foundation
+import SwiftyJSON
 
-class NetworkManager: NSObject {
-    var endPointManager: EndPointManager
+class NetworkManager {
+    static let shared: NetworkManager = NetworkManager()
+    private init() { }
     
-    init(endPointManager: EndPointManager) {
-        self.endPointManager = endPointManager
+    func getGenres(completion: @escaping (Result<[GenreEntity], NetworkError>) -> Void) {
+        
+        let endpoint = EndPointFactory.shared
+        
+        let url: String = endpoint.configure(for: .genre)
+        self.request(for: url) { data, response, error in
+            
+            if let _ = error {
+                completion(.failure(.missingUrl))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            do {
+                let decode = try JSON(data: data!)
+                
+                var genres: [GenreEntity] = []
+                let items = decode["genres"].array
+                
+                items?.forEach({ item in
+                    genres.append(GenreEntity(id: item["id"].stringValue, name: item["name"].stringValue))
+                })
+                
+                completion(.success(genres))
+            } catch {
+                completion(.failure(.decodingFailed))
+            }
+        }
     }
     
-    func createRequest(for endPoint: EndPoints, with completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        self.endPointManager = EndPointManager(for: endPoint)
-        
+    
+    // MARK: NETWORK REQUEST
+    func request(for url: String, with completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         //TODO: SHOW NEGATIVE ALERT
-        guard let url = URL(string: endPointManager.getURL()) else { return }
+        guard let url = URL(string: url) else { return }
         
         let task = createTask(url: url, completion: completion)
         

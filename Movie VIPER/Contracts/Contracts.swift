@@ -9,7 +9,7 @@ import UIKit
 
 protocol ViewProtocol: AnyObject {
     var presenter: PresenterProtocol? { get set }
-    
+    func reloadGenres(data: [GenreEntity])
     func showLoading()
     func hideLoading()
     func showNegativeMessage()
@@ -24,9 +24,11 @@ protocol InteractorProtocol: AnyObject {
     
 }
 protocol PresenterProtocol: AnyObject {
-    var baseView: UIViewController { get set }
+    var baseView: ViewProtocol { get set }
     var interactor: InteractorProtocol { get set }
     var route: RouterProtocol { get set }
+    
+    func fetchGenres()
 //    func addingNewMonster()
 //    func presentListOfMonsters(monsterType: MonsterType?)
 //    func presentDetailOfMonsters(isDetail: Bool, monsterId: Monster?)

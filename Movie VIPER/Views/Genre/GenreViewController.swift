@@ -8,11 +8,14 @@
 import UIKit
 
 class GenreViewController: UIViewController, ViewProtocol {
+    
     var presenter: PresenterProtocol?
 
     var collectionView: UICollectionView!
     
     let cellIdentifier = "GenreCell"
+    
+    var genres: [GenreEntity]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,8 @@ class GenreViewController: UIViewController, ViewProtocol {
         
         let nibCell = UINib(nibName: cellIdentifier, bundle: nil)
         collectionView.register(nibCell, forCellWithReuseIdentifier: cellIdentifier)
+        
+        presenter?.fetchGenres()
     }
     
     private func layoutUI() {
@@ -41,19 +46,22 @@ class GenreViewController: UIViewController, ViewProtocol {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
     }
-
+    func reloadGenres(data: [GenreEntity]) {
+        genres = data
+        collectionView.reloadData()
+    }
 }
 
-extension GenreViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension GenreViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //TODO: FIX
-        return 10
+        return genres?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! GenreCell
         
-        cell.setTitle(title: "aaaa")
+        cell.setTitle(title: genres?[indexPath.row].name ?? "")
         
         return cell
     }
@@ -73,4 +81,14 @@ extension GenreViewController: UICollectionViewDelegate, UICollectionViewDataSou
         return 10
     }
     
+}
+
+extension GenreViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let id = genres?[indexPath.row].id else {
+            //TODO: ERROR
+            return
+        }
+        presenter?.route.navigateToMovieList(in: id)
+    }
 }

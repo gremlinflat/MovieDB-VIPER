@@ -8,25 +8,31 @@
 import Foundation
 
 class MovieInteractor: InteractorProtocol {
-    var presenter: PresenterProtocol?
-    
     func reFetchData(kind endpoint: EndPoints) {
-        
-        
-        
-//        switch endpoint {
-//
-//        case .movieList(_, _):
-//            <#code#>
-//        case .movieDetails(_):
-//            <#code#>
-//        case .movieVideo(_):
-//            <#code#>
-//        case .imageAsset(_):
-//            <#code#>
-//        }
+        switch endpoint {
+            
+        case .genre:
+            networkManager.getGenres { [weak self] result in
+                
+                guard let self = self else { return }
+                switch result {
+                case .success(let genres):
+                    self.presenter?.baseView.reloadGenres(data: genres)
+                case .failure(_):
+                    fatalError()
+                }
+            }
+        case .movieList(_, _):
+            fatalError()
+        case .movieDetails(_):
+            fatalError()
+        case .movieVideo(_):
+            fatalError()
+        case .imageAsset(_):
+            fatalError()
+        }
     }
     
-    
-    
+    var presenter: PresenterProtocol?
+    var networkManager: NetworkManager = NetworkManager.shared
 }
