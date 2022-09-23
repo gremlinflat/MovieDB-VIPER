@@ -78,6 +78,7 @@
 		BE45F34C28DE251F005FD5BC /* Genre */ = {
 			isa = PBXGroup;
 			children = (
+				BE45F35528DE2C32005FD5BC /* GenreCell.xib */,
 				BED9D72028DC949E003E7B84 /* GenreViewController.swift */,
 				BED329F828DE17DF00B15CDA /* GenreCell.swift */,
 			);
@@ -96,7 +97,6 @@
 		BED329FC28DE233900B15CDA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BE45F35528DE2C32005FD5BC /* GenreCell.xib */,
 				BE45F34D28DE2551005FD5BC /* DetailMovieViewController.swift */,
 				BE45F34E28DE2551005FD5BC /* DetailMovieViewController.xib */,
 				BE45F34C28DE251F005FD5BC /* Genre */,
