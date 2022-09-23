@@ -9,25 +9,31 @@
 /* Begin PBXBuildFile section */
 		BED9D71D28DC949E003E7B84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D71C28DC949E003E7B84 /* AppDelegate.swift */; };
 		BED9D71F28DC949E003E7B84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D71E28DC949E003E7B84 /* SceneDelegate.swift */; };
-		BED9D72128DC949E003E7B84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D72028DC949E003E7B84 /* ViewController.swift */; };
+		BED9D72128DC949E003E7B84 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D72028DC949E003E7B84 /* RootViewController.swift */; };
 		BED9D72628DC94A0003E7B84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BED9D72528DC94A0003E7B84 /* Assets.xcassets */; };
 		BED9D72928DC94A0003E7B84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED9D72728DC94A0003E7B84 /* LaunchScreen.storyboard */; };
 		BED9D75128DCEC0B003E7B84 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D75028DCEC0B003E7B84 /* NetworkManager.swift */; };
 		BED9D75328DCEC1A003E7B84 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D75228DCEC1A003E7B84 /* Secrets.swift */; };
 		BED9D75728DD3D1B003E7B84 /* EndPointManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D75628DD3D1B003E7B84 /* EndPointManager.swift */; };
+		BED9D76B28DD4F9E003E7B84 /* BaseViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D76A28DD4F9E003E7B84 /* BaseViewProtocol.swift */; };
+		BED9D76D28DD9996003E7B84 /* ReviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D76C28DD9996003E7B84 /* ReviewEntity.swift */; };
+		BED9D76F28DD9A60003E7B84 /* MovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED9D76E28DD9A60003E7B84 /* MovieEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BED9D71928DC949E003E7B84 /* Movie VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED9D71C28DC949E003E7B84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BED9D71E28DC949E003E7B84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BED9D72028DC949E003E7B84 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BED9D72028DC949E003E7B84 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		BED9D72528DC94A0003E7B84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BED9D72828DC94A0003E7B84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BED9D72A28DC94A0003E7B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BED9D75028DCEC0B003E7B84 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BED9D75228DCEC1A003E7B84 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		BED9D75628DD3D1B003E7B84 /* EndPointManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointManager.swift; sourceTree = "<group>"; };
+		BED9D76A28DD4F9E003E7B84 /* BaseViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewProtocol.swift; sourceTree = "<group>"; };
+		BED9D76C28DD9996003E7B84 /* ReviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEntity.swift; sourceTree = "<group>"; };
+		BED9D76E28DD9A60003E7B84 /* MovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +68,9 @@
 			children = (
 				BED9D71C28DC949E003E7B84 /* AppDelegate.swift */,
 				BED9D71E28DC949E003E7B84 /* SceneDelegate.swift */,
-				BED9D72028DC949E003E7B84 /* ViewController.swift */,
+				BED9D72028DC949E003E7B84 /* RootViewController.swift */,
+				BED9D76A28DD4F9E003E7B84 /* BaseViewProtocol.swift */,
+				BED9D77028DD9EAF003E7B84 /* Entity */,
 				BED9D75828DD3D65003E7B84 /* Services */,
 				BED9D75928DD4DAD003E7B84 /* Helpers */,
 				BED9D72528DC94A0003E7B84 /* Assets.xcassets */,
@@ -87,6 +95,15 @@
 				BED9D75228DCEC1A003E7B84 /* Secrets.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BED9D77028DD9EAF003E7B84 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				BED9D76C28DD9996003E7B84 /* ReviewEntity.swift */,
+				BED9D76E28DD9A60003E7B84 /* MovieEntity.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,9 +177,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BED9D75128DCEC0B003E7B84 /* NetworkManager.swift in Sources */,
+				BED9D76D28DD9996003E7B84 /* ReviewEntity.swift in Sources */,
+				BED9D76F28DD9A60003E7B84 /* MovieEntity.swift in Sources */,
 				BED9D75328DCEC1A003E7B84 /* Secrets.swift in Sources */,
-				BED9D72128DC949E003E7B84 /* ViewController.swift in Sources */,
+				BED9D72128DC949E003E7B84 /* RootViewController.swift in Sources */,
 				BED9D71D28DC949E003E7B84 /* AppDelegate.swift in Sources */,
+				BED9D76B28DD4F9E003E7B84 /* BaseViewProtocol.swift in Sources */,
 				BED9D75728DD3D1B003E7B84 /* EndPointManager.swift in Sources */,
 				BED9D71F28DC949E003E7B84 /* SceneDelegate.swift in Sources */,
 			);
