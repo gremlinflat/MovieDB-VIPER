@@ -14,12 +14,17 @@ class MovieRouter: RouterProtocol {
         self.viewController = viewController
     }
     
-    func navigateToMovieList(in genre: String) {
-//        viewController?.navigationController?.pushViewController(_, animated: true)
+    func navigateToMovieList(in genre: GenreEntity, with presenter: PresenterProtocol) {
+        
+        let vc = UIStoryboard.init(name: "MovieList", bundle: nil).instantiateViewController(withIdentifier: "MovieListScene") as! MovieListViewController
+        vc.presenter = presenter
+        vc.genre = genre
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func navigateToMovieDetail(for id: String) {
+    func navigateToMovieDetail(for id: String,  with presenter: PresenterProtocol) {
         let vc = UIStoryboard.init(name: "DetailMovie", bundle: nil).instantiateViewController(withIdentifier: "DetailMovieScene") as! DetailMovieViewController
+        
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     

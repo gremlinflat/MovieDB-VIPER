@@ -35,10 +35,44 @@ class NetworkManager {
                 let items = decode["genres"].array
                 
                 items?.forEach({ item in
-                    genres.append(GenreEntity(id: item["id"].stringValue, name: item["name"].stringValue))
+                    genres.append(GenreEntity(from: item))
                 })
                 
                 completion(.success(genres))
+            } catch {
+                completion(.failure(.decodingFailed))
+            }
+        }
+    }
+    func getMovies(for genre: String, in page: Int, completion: @escaping (Result<[MovieEntity], NetworkError>) -> Void) {
+        
+        let endpoint = EndPointFactory.shared
+        
+        let url: String = endpoint.configure(for: .movieList(genre, page))
+        print(url)
+        self.request(for: url) { data, response, error in
+            
+            if let _ = error {
+                completion(.failure(.missingUrl))
+                return
+            }
+            print(data)
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            do {
+                let decode = try JSON(data: data!)
+//                debugPrint(decode)
+                var movies: [MovieEntity] = []
+                let items = decode["genres"].array
+                
+                items?.forEach({ item in
+//                    movies.append(GenreEntity(from: item))
+                })
+                
+                completion(.success(movies))
             } catch {
                 completion(.failure(.decodingFailed))
             }

@@ -6,10 +6,23 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct GenreEntity: Codable {
-    let id: String
+    let id: Int
     let name: String
+    
+    init(from json: JSON) {
+        
+        guard let genreJson = json.dictionaryObject else {
+            id = -1
+            name = ""
+            return
+        }
+        
+        id = genreJson["id"] as! Int
+        name = genreJson["name"] as! String
+
+    }
 }
-
-
+//

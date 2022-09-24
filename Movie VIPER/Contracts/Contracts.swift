@@ -9,7 +9,6 @@ import UIKit
 
 protocol ViewProtocol: AnyObject {
     var presenter: PresenterProtocol? { get set }
-    func reloadGenres(data: [GenreEntity])
     func showLoading()
     func hideLoading()
     func showNegativeMessage()
@@ -28,7 +27,9 @@ protocol PresenterProtocol: AnyObject {
     var interactor: InteractorProtocol { get set }
     var route: RouterProtocol { get set }
     
+    
     func fetchGenres()
+    func fetchMovies(for genre: String, in page: Int)
 //    func addingNewMonster()
 //    func presentListOfMonsters(monsterType: MonsterType?)
 //    func presentDetailOfMonsters(isDetail: Bool, monsterId: Monster?)
@@ -36,6 +37,15 @@ protocol PresenterProtocol: AnyObject {
 }
 
 protocol RouterProtocol: AnyObject {
-    func navigateToMovieList(in genre: String)
-    func navigateToMovieDetail(for id: String)
+    func navigateToMovieList(in genre: GenreEntity, with presenter: PresenterProtocol)
+    func navigateToMovieDetail(for id: String, with presenter: PresenterProtocol)
+}
+
+// MARK: Communication adapter
+protocol GenreViewProtocol: ViewProtocol {
+    func reloadGenres(data: [GenreEntity])
+}
+
+protocol GovieListProtocol: ViewProtocol {
+    
 }

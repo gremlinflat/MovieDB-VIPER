@@ -17,13 +17,24 @@ class MovieInteractor: InteractorProtocol {
                 guard let self = self else { return }
                 switch result {
                 case .success(let genres):
-                    self.presenter?.baseView.reloadGenres(data: genres)
+                    (self.presenter?.baseView as? GenreViewProtocol)?.reloadGenres(data: genres)
                 case .failure(_):
                     fatalError()
                 }
             }
-        case .movieList(_, _):
-            fatalError()
+        case .movieList(let genre, let page):
+            networkManager.getMovies(for: genre, in: page) { [weak self] result in
+               
+                print(result)
+            
+                switch result {
+                    
+                case .success(_):
+                    print("suc")
+                case .failure(_):
+                    print("fail")
+                }
+            }
         case .movieDetails(_):
             fatalError()
         case .movieVideo(_):

@@ -36,6 +36,7 @@ class EndPointFactory {
             args = [
                 "language" : "en-US",
                 "include_adult" : "false",
+                "sort_by" : "popularity.desc",
                 "with_genres" : genre,
                 "page" : "\(page)"
             ]
@@ -55,7 +56,7 @@ class EndPointFactory {
             args = [:]
             
         case .genre:
-            path = "\(baseURL)/genre/movie/list"
+            path = "/genre/movie/list"
             args = [
                 "language" : "en-US"
             ]
@@ -72,6 +73,6 @@ class EndPointFactory {
         }
 
         
-        return "\(path!)?api_key=\(SECRETS.movieApiKey)\(flattenArgs)"
+        return "\(baseURL)\(path!)?api_key=\(SECRETS.movieApiKey)\(flattenArgs)"
     }
 }

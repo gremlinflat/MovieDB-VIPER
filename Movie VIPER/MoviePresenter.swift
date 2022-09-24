@@ -23,5 +23,9 @@ class MoviePresenter: PresenterProtocol{
     func fetchGenres() {
         interactor.reFetchData(kind: .genre)
     }
+    
+    func fetchMovies(for genre: String, in page: Int){
+        interactor.reFetchData(kind: .movieList(genre, page))
+    }
 }
 

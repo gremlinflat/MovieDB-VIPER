@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GenreViewController: UIViewController, ViewProtocol {
+class GenreViewController: UIViewController, GenreViewProtocol {
     
     var presenter: PresenterProtocol?
 
@@ -21,9 +21,11 @@ class GenreViewController: UIViewController, ViewProtocol {
         super.viewDidLoad()
         setNavigationBarTitleWith("Genre")
         navigationController?.navigationBar.prefersLargeTitles = true
-        layoutUI()
-        collectionView.register(GenreCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
+        layoutUI()
+        
+//        collectionView.register(GenreCell.self, forCellWithReuseIdentifier: cellIdentifier)
+
         let nibCell = UINib(nibName: cellIdentifier, bundle: nil)
         collectionView.register(nibCell, forCellWithReuseIdentifier: cellIdentifier)
         
@@ -85,10 +87,6 @@ extension GenreViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
 extension GenreViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let id = genres?[indexPath.row].id else {
-            //TODO: ERROR
-            return
-        }
-        presenter?.route.navigateToMovieList(in: id)
+        presenter?.route.navigateToMovieList(in: (genres?[indexPath.row])!, with: presenter!)
     }
 }
