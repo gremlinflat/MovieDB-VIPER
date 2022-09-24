@@ -22,9 +22,6 @@ class MovieListViewController: UIViewController, MovieListViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationItem.title = genre?.name
-        title = genre?.name
-        navigationController?.navigationBar.prefersLargeTitles = true
     
         let uinib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.register(uinib, forCellReuseIdentifier: cellIdentifier)
@@ -33,6 +30,11 @@ class MovieListViewController: UIViewController, MovieListViewProtocol {
         tableView.dataSource = self
         
         presenter?.fetchMovies(for: "\(genre?.id ?? -1)", in: page)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.navigationItem.title = genre?.name
+        title = genre?.name
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     func reloadMovies(data: [MovieEntity]) {

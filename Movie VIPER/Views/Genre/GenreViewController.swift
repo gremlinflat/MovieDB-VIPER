@@ -20,7 +20,6 @@ class GenreViewController: UIViewController, GenreViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBarTitleWith("Genre")
-        navigationController?.navigationBar.prefersLargeTitles = true
         
         DispatchQueue.main.async {
             self.layoutUI()
@@ -29,10 +28,10 @@ class GenreViewController: UIViewController, GenreViewProtocol {
             self.collectionView.register(nibCell, forCellWithReuseIdentifier: self.cellIdentifier)
         }
         
-//        collectionView.register(GenreCell.self, forCellWithReuseIdentifier: cellIdentifier)
-
-        
         presenter?.fetchGenres()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func layoutUI() {

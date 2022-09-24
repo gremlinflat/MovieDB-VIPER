@@ -56,8 +56,8 @@ class MovieDetailViewController: UIViewController, MovieDetailViewProtocol {
         movieDate.text = movie.relaseYear()
         movieOverview.text = movie.overview
         
-        loadImageAsset(path: movie.backdropPath!, in: moviebanner)
-        loadImageAsset(path: movie.posterPath!, in: movieposter)
+        loadImageAsset(path: movie.backdropPath, in: moviebanner)
+        loadImageAsset(path: movie.posterPath, in: movieposter)
     }
     
     func setTrailerKey(key: String){
@@ -73,7 +73,11 @@ class MovieDetailViewController: UIViewController, MovieDetailViewProtocol {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
         trailerButton.isSelected = false
     }
-    func loadImageAsset(path: String, in imageView: UIImageView){
+    func loadImageAsset(path: String?, in imageView: UIImageView){
+        guard let path = path else {
+            imageView.isHidden = true
+            return
+        }
         let endpoint = EndPointFactory.shared.getImageURL(imgPath: path)
         let url = URL(string: endpoint)
         let processor = DownsamplingImageProcessor(size: imageView.bounds.size)
@@ -109,6 +113,12 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ReviewCell
         cell.prepareCell((review?[indexPath.row])!)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let url = URL(string: review![indexPath.row].url)!
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     

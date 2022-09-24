@@ -12,7 +12,7 @@ struct MovieEntity: Codable, Identifiable {
     let id: Int
     let title: String
     
-    let overview: String
+    let overview: String?
     let tagline: String?
     
     let posterPath: String?
@@ -41,7 +41,7 @@ struct MovieEntity: Codable, Identifiable {
         id =  movieJsonDict["id"] as! Int
         title =  movieJsonDict["title"] as! String
         
-        overview =  movieJsonDict["overview"] as! String
+        overview =  movieJsonDict["overview"] as? String
         tagline = movieJsonDict["tagline"] as? String
         
         posterPath =  movieJsonDict["poster_path"] as? String

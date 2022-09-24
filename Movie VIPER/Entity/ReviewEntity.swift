@@ -13,11 +13,12 @@ struct ReviewEntity: Codable, Identifiable {
     let author: String
     let avatarPath: String?
     let content: String
-    
+    let url: String
     init(from review: JSON) {
         id = review["id"].stringValue
         author =  (review["author_details"]["name"]).stringValue
         content = review["content"].stringValue
+        url = review["url"].stringValue
         
         if (review["author_details"]["avatar_path"]).stringValue != "null" {
             avatarPath = (review["author_details"]["avatar_path"]).stringValue
