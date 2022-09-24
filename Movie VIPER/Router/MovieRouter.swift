@@ -19,6 +19,8 @@ class MovieRouter: RouterProtocol {
         let vc = UIStoryboard.init(name: "MovieList", bundle: nil).instantiateViewController(withIdentifier: "MovieListScene") as! MovieListViewController
         vc.presenter = presenter
         vc.genre = genre
+        
+        
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     

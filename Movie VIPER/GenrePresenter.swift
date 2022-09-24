@@ -7,18 +7,19 @@
 
 import UIKit
 
-class MoviePresenter: PresenterProtocol{
-
+class GenrePresenter: PresenterProtocol{
     
-    var baseView: ViewProtocol
+    var viewPresented: ViewProtocol
+    
     var interactor: InteractorProtocol
     var route: RouterProtocol
     
     init(baseView: ViewProtocol, interactor: InteractorProtocol, route: RouterProtocol) {
-        self.baseView = baseView
+        self.viewPresented = baseView
         self.interactor = interactor
         self.route = route
     }
+    
     
     func fetchGenres() {
         interactor.reFetchData(kind: .genre)
@@ -27,5 +28,6 @@ class MoviePresenter: PresenterProtocol{
     func fetchMovies(for genre: String, in page: Int){
         interactor.reFetchData(kind: .movieList(genre, page))
     }
+    
 }
 

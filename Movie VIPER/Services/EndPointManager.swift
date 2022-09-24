@@ -12,7 +12,6 @@ enum EndPoints {
     case movieList(String, Int)
     case movieDetails(String)
     case movieVideo(String)
-    case imageAsset(String)
 }
 
 class EndPointFactory {
@@ -51,10 +50,6 @@ class EndPointFactory {
             // TODO: UPDATE LATER
             fatalError()
             
-        case .imageAsset(let imgPath):
-            path = "\(baseImageURL)\(imgPath)"
-            args = [:]
-            
         case .genre:
             path = "/genre/movie/list"
             args = [
@@ -74,5 +69,9 @@ class EndPointFactory {
 
         
         return "\(baseURL)\(path!)?api_key=\(SECRETS.movieApiKey)\(flattenArgs)"
+    }
+    
+    func getImageURL(imgPath: String) -> String {
+        return "\(baseImageURL)\(imgPath)"
     }
 }

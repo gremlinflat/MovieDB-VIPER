@@ -23,7 +23,7 @@ protocol InteractorProtocol: AnyObject {
     
 }
 protocol PresenterProtocol: AnyObject {
-    var baseView: ViewProtocol { get set }
+    var viewPresented: ViewProtocol { get set }
     var interactor: InteractorProtocol { get set }
     var route: RouterProtocol { get set }
     
@@ -46,6 +46,6 @@ protocol GenreViewProtocol: ViewProtocol {
     func reloadGenres(data: [GenreEntity])
 }
 
-protocol GovieListProtocol: ViewProtocol {
-    
+protocol MovieListProtocol: ViewProtocol {
+    func reloadMovies(data: [MovieEntity])
 }

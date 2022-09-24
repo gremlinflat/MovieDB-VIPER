@@ -7,7 +7,8 @@
 
 import UIKit
 
-class MovieListViewController: UIViewController, ViewProtocol {
+class MovieListViewController: UIViewController, MovieListProtocol {
+    
     var presenter: PresenterProtocol?
     
     
@@ -33,16 +34,24 @@ class MovieListViewController: UIViewController, ViewProtocol {
         presenter?.fetchMovies(for: "\(genre!.id)", in: page)
     }
 
+    func reloadMovies(data: [MovieEntity]) {
+        print("masuk")
+        moviesList = data
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
 
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return moviesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MovieListTableViewCell
+        
         return cell
     }
     

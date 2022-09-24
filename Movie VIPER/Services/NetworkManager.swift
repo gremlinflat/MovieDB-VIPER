@@ -49,14 +49,12 @@ class NetworkManager {
         let endpoint = EndPointFactory.shared
         
         let url: String = endpoint.configure(for: .movieList(genre, page))
-        print(url)
         self.request(for: url) { data, response, error in
             
             if let _ = error {
                 completion(.failure(.missingUrl))
                 return
             }
-            print(data)
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 completion(.failure(.noData))
                 return
@@ -64,12 +62,11 @@ class NetworkManager {
             
             do {
                 let decode = try JSON(data: data!)
-//                debugPrint(decode)
                 var movies: [MovieEntity] = []
-                let items = decode["genres"].array
+                let items = decode["results"].array
                 
                 items?.forEach({ item in
-//                    movies.append(GenreEntity(from: item))
+                    movies.append(MovieEntity(from: item))
                 })
                 
                 completion(.success(movies))

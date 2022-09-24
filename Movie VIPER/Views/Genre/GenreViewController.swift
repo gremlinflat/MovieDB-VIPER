@@ -22,12 +22,15 @@ class GenreViewController: UIViewController, GenreViewProtocol {
         setNavigationBarTitleWith("Genre")
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        layoutUI()
+        DispatchQueue.main.async {
+            self.layoutUI()
+            
+            let nibCell = UINib(nibName: self.cellIdentifier, bundle: nil)
+            self.collectionView.register(nibCell, forCellWithReuseIdentifier: self.cellIdentifier)
+        }
         
 //        collectionView.register(GenreCell.self, forCellWithReuseIdentifier: cellIdentifier)
 
-        let nibCell = UINib(nibName: cellIdentifier, bundle: nil)
-        collectionView.register(nibCell, forCellWithReuseIdentifier: cellIdentifier)
         
         presenter?.fetchGenres()
     }
@@ -50,7 +53,9 @@ class GenreViewController: UIViewController, GenreViewProtocol {
     }
     func reloadGenres(data: [GenreEntity]) {
         genres = data
-        collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
 }
 

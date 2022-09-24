@@ -20,7 +20,7 @@ class MovieListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         setupUI()
-        print("sfag")
+        print("this is tvc")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,7 +39,7 @@ class MovieListTableViewCell: UITableViewCell {
         movieYear.text = movieEntity.relaseYear()
         movieOverview.text = movieEntity.overview
         
-        let endpoint = EndPointFactory.shared.configure(for: .imageAsset(movieEntity.posterPath!))
+        let endpoint = EndPointFactory.shared.getImageURL(imgPath: movieEntity.posterPath!)
         moviePoster.kf.setImage(with: URL(string: endpoint))
     }
 }

@@ -20,7 +20,7 @@ class MovieBuilder: VIPERModuleProtocol {
         let baseView = GenreViewController()
         let interactor = MovieInteractor()
         let router = MovieRouter(viewController: baseView)
-        let presenter = MoviePresenter(baseView: baseView, interactor: interactor, route: router)
+        let presenter = GenrePresenter(baseView: baseView, interactor: interactor, route: router)
         
         interactor.presenter = presenter
         baseView.presenter = presenter

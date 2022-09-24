@@ -17,7 +17,7 @@ class MovieInteractor: InteractorProtocol {
                 guard let self = self else { return }
                 switch result {
                 case .success(let genres):
-                    (self.presenter?.baseView as? GenreViewProtocol)?.reloadGenres(data: genres)
+                    (self.presenter?.viewPresented as? GenreViewProtocol)?.reloadGenres(data: genres)
                 case .failure(_):
                     fatalError()
                 }
@@ -25,21 +25,20 @@ class MovieInteractor: InteractorProtocol {
         case .movieList(let genre, let page):
             networkManager.getMovies(for: genre, in: page) { [weak self] result in
                
-                print(result)
+                guard let self = self else { return }
             
                 switch result {
                     
-                case .success(_):
-                    print("suc")
+                case .success(let movies):
+                    print("interactor sucess")
+                    (self.presenter?.viewPresented as? MovieListViewController)?.reloadMovies(data: movies)
                 case .failure(_):
-                    print("fail")
+                    fatalError()
                 }
             }
         case .movieDetails(_):
             fatalError()
         case .movieVideo(_):
-            fatalError()
-        case .imageAsset(_):
             fatalError()
         }
     }
