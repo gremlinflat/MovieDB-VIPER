@@ -33,7 +33,7 @@ class NetworkManager {
                 items?.forEach({ item in
                     genres.append(GenreEntity(from: item))
                 })
-    
+                
                 completion(.success(genres))
             } catch {
                 completion(.failure(.decodingFailed))
@@ -113,7 +113,6 @@ class NetworkManager {
             do {
                 let decode = try JSON(data: data!)
                 if let resultsList = decode.dictionary?["results"]?.array {
-                    print(resultsList)
                     if resultsList.count > 0,  let trailerKey = resultsList[0].dictionary?["key"]?.string{
                         completion(.success(trailerKey))
                     } else {
@@ -125,7 +124,36 @@ class NetworkManager {
             }
         }
     }
-    func getReviews(movieId: String) {}
+    func getReviews(movieId: String, completion: @escaping (Result<[ReviewEntity], NetworkError>) -> Void) {
+        let endpoint = EndPointFactory.shared
+        
+        let url: String = endpoint.configure(for: .movieReview(movieId))
+        self.request(for: url) { data, response, error in
+            
+            if let _ = error {
+                completion(.failure(.missingUrl))
+                return
+            }
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            do {
+                let decode = try JSON(data: data!)
+                var reviews: [ReviewEntity] = []
+                let items = decode["results"].array
+                
+                items?.forEach({ item in
+                    reviews.append(ReviewEntity(from: item))
+                })
+                completion(.success(reviews))
+                
+            } catch {
+                completion(.failure(.decodingFailed))
+            }
+        }
+    }
     
     // MARK: NETWORK REQUEST
     func request(for url: String, with completion: @escaping (Data?, URLResponse?, Error?) -> Void) {

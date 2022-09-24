@@ -18,17 +18,17 @@ class MovieListViewController: UIViewController, MovieListViewProtocol {
     var moviesList: [MovieEntity] = []
     var page: Int = 1
     
-    let Identifier = "MovieCell"
+    let cellIdentifier = "MovieCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationItem.title = genre?.name
         title = genre?.name
         navigationController?.navigationBar.prefersLargeTitles = true
+    
+        let uinib = UINib(nibName: cellIdentifier, bundle: nil)
+        tableView.register(uinib, forCellReuseIdentifier: cellIdentifier)
         
-//        tableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: Identifier)
-        let uinib = UINib(nibName: Identifier, bundle: nil)
-        tableView.register(uinib, forCellReuseIdentifier: Identifier)
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -50,7 +50,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Identifier, for: indexPath) as! MovieCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MovieCell
         cell.populate(movieEntity: moviesList[indexPath.row])
         return cell
     }

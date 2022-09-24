@@ -35,6 +35,7 @@ protocol PresenterProtocol: AnyObject {
     
     func fetchMovie(id: String)
     func fetchMovieTrailer(id: String)
+    func fetchMovieReview(id: String)
 }
 
 protocol RouterProtocol: AnyObject {
@@ -51,3 +52,6 @@ protocol MovieListViewProtocol: ViewProtocol {
     func reloadMovies(data: [MovieEntity])
 }
 
+protocol MovieDetailViewProtocol: ViewProtocol {
+    func reloadReviews(data: [ReviewEntity])
+}

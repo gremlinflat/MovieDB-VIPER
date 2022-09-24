@@ -12,6 +12,7 @@ enum EndPoints {
     case movieList(String, Int)
     case movieDetails(String)
     case movieTrailer(String)
+    case movieReview(String)
 }
 
 class EndPointFactory {
@@ -54,6 +55,11 @@ class EndPointFactory {
             
         case .movieTrailer(let movieId):
             path = "/movie/\(movieId)/videos"
+            args = [
+                "language" : "en-US"
+            ]
+        case .movieReview(let movieId):
+            path = "/movie/\(movieId)/reviews"
             args = [
                 "language" : "en-US"
             ]

@@ -26,7 +26,7 @@ class MovieRouter: RouterProtocol {
     }
     
     func navigateToMovieDetail(for movie: String, id: String, with presenter: PresenterProtocol) {
-        let vc = UIStoryboard.init(name: "DetailMovie", bundle: nil).instantiateViewController(withIdentifier: "DetailMovieScene") as! DetailMovieViewController
+        let vc = UIStoryboard.init(name: "MovieDetail", bundle: nil).instantiateViewController(withIdentifier: "MovieDetailScene") as! MovieDetailViewController
         vc.presenter = presenter
         vc.presenter?.viewPresented = vc
         vc.id = id

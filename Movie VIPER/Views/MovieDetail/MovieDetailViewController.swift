@@ -8,11 +8,15 @@
 import UIKit
 import Kingfisher
 
-class DetailMovieViewController: UIViewController, ViewProtocol {
+class MovieDetailViewController: UIViewController, MovieDetailViewProtocol {
+    
     var presenter: PresenterProtocol?
     var id: String = ""
     var trailerId: String = ""
     
+    var review: [ReviewEntity]?
+    
+    @IBOutlet weak var reviewLabel: UILabel!
     @IBOutlet weak var moviebanner: UIImageView!
     @IBOutlet weak var movieposter: UIImageView!
     @IBOutlet weak var movietitle: UILabel!
@@ -24,14 +28,24 @@ class DetailMovieViewController: UIViewController, ViewProtocol {
     @IBOutlet weak var trailerButton: UIButton!
     
     @IBOutlet weak var reviewTableView: UITableView!
+    
+    let cellIdentifier = "ReviewCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.navigationBar.prefersLargeTitles = false
         trailerButton.isSelected = true
         
+        let uinib = UINib(nibName: cellIdentifier, bundle: nil)
+        reviewTableView.register(uinib, forCellReuseIdentifier: cellIdentifier)
+        reviewTableView.delegate = self
+        reviewTableView.dataSource = self
+        
         presenter?.fetchMovie(id: id)
         presenter?.fetchMovieTrailer(id: id)
+        presenter?.fetchMovieReview(id: id)
+        reviewLabel.isHidden = true
         movieposter.layer.cornerRadius = 12
     }
     
@@ -74,4 +88,28 @@ class DetailMovieViewController: UIViewController, ViewProtocol {
             ]
         )
     }
+    
+    func reloadReviews(data: [ReviewEntity]) {
+        review = data
+        if review!.count > 0 {
+            reviewLabel.isHidden = false
+            DispatchQueue.main.async { [weak self] in
+                self?.reviewTableView.reloadData()
+            }
+        }
+    }
+}
+
+extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return review?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ReviewCell
+        cell.prepareCell((review?[indexPath.row])!)
+        return cell
+    }
+    
+    
 }

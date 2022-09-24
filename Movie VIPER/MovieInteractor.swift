@@ -54,11 +54,23 @@ class MovieInteractor: InteractorProtocol {
         case .movieTrailer(let movieId):
             networkManager.getMovieTrailer(movieId: movieId) { [weak self] result in
                 guard let self = self else { return }
+                
                 switch result {
                 case .success(let key):
                     self.presenter?.receiveData(data: key)
                 case .failure(let error):
                     fatalError(error.rawValue)
+                }
+            }
+        case .movieReview(let movieId):
+            networkManager.getReviews(movieId: movieId) { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success(let reviews):
+                    self.presenter?.receiveData(data: reviews)
+                case .failure(_):
+                    fatalError()
                 }
             }
         }
