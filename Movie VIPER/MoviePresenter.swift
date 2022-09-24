@@ -9,12 +9,18 @@ import UIKit
 
 class MoviePresenter: PresenterProtocol {
     func receiveData<T>(data: T) {
-        if let a = data as? [GenreEntity] {
-            (viewPresented as? GenreViewProtocol)?.reloadGenres(data: a)
+        if let genres = data as? [GenreEntity] {
+            (viewPresented as? GenreViewProtocol)?.reloadGenres(data: genres)
         }
         
-        if let b = data as? [MovieEntity] {
-            (viewPresented as? MovieListViewController)?.reloadMovies(data: b)
+        if let movies = data as? [MovieEntity] {
+            (viewPresented as? MovieListViewController)?.reloadMovies(data: movies)
+        }
+        if let movie = data as? MovieEntity {
+            (viewPresented as? DetailMovieViewController)?.loadMovies(movie)
+        }
+        if let ytkey = data as? String {
+            (viewPresented as? DetailMovieViewController)?.setTrailerKey(key: ytkey)
         }
     }
     
@@ -37,8 +43,13 @@ class MoviePresenter: PresenterProtocol {
         interactor.reFetchData(kind: .movieList(genre, page))
     }
     
-    func fetchMovies(id: String) {
+    func fetchMovie(id: String) {
         interactor.reFetchData(kind: .movieDetails(id))
+    }
+    
+    func fetchMovieTrailer(id: String) {
+        print("presenter")
+        interactor.reFetchData(kind: .movieTrailer(id))
     }
     
 }

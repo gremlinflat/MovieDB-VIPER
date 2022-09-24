@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ReviewEntity: Codable {
+struct ReviewEntity: Codable, Identifiable {
     let id: String?
     let author: String
     let avatarPath: String?

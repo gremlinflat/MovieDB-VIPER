@@ -30,10 +30,11 @@ protocol PresenterProtocol: AnyObject {
     func receiveData<T>(data: T)
     
     func fetchGenres()
-
+    
     func fetchMovies(for genre: String, in page: Int)
     
-    func fetchMovies(id: String)
+    func fetchMovie(id: String)
+    func fetchMovieTrailer(id: String)
 }
 
 protocol RouterProtocol: AnyObject {

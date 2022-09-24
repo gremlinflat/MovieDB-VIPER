@@ -11,7 +11,7 @@ enum EndPoints {
     case genre
     case movieList(String, Int)
     case movieDetails(String)
-    case movieVideo(String)
+    case movieTrailer(String)
 }
 
 class EndPointFactory {
@@ -40,15 +40,11 @@ class EndPointFactory {
                 "page" : "\(page)"
             ]
             
-        case .movieDetails(let ytID):
-            path = "/discover/movie/\(ytID)"
+        case .movieDetails(let movieId):
+            path = "/movie/\(movieId)"
             args = [
                 "language" : "en-US"
             ]
-            
-        case .movieVideo(_):
-            // TODO: UPDATE LATER
-            fatalError()
             
         case .genre:
             path = "/genre/movie/list"
@@ -56,6 +52,11 @@ class EndPointFactory {
                 "language" : "en-US"
             ]
             
+        case .movieTrailer(let movieId):
+            path = "/movie/\(movieId)/videos"
+            args = [
+                "language" : "en-US"
+            ]
         }
         return getURL()
     }

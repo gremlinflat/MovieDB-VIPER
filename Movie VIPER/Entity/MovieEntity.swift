@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-struct MovieEntity: Codable {
+struct MovieEntity: Codable, Identifiable {
     let id: Int
     let title: String
     

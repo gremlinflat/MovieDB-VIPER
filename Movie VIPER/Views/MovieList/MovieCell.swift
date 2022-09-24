@@ -40,8 +40,7 @@ class MovieCell: UITableViewCell {
         
         let endpoint = EndPointFactory.shared.getImageURL(imgPath: movieEntity.posterPath!)
         let url = URL(string: endpoint)
-        let processor = DownsamplingImageProcessor(size: moviePoster.bounds.size)
-                     |> RoundCornerImageProcessor(cornerRadius: 20)
+        let processor = DownsamplingImageProcessor(size: moviePoster.bounds.size) |> RoundCornerImageProcessor(cornerRadius: 20)
         moviePoster.kf.indicatorType = .activity
         moviePoster.kf.setImage(
             with: url,
@@ -50,6 +49,7 @@ class MovieCell: UITableViewCell {
                 .scaleFactor(UIScreen.main.scale),
                 .transition(.fade(1)),
                 .cacheOriginalImage
-            ])
+            ]
+        )
     }
 }

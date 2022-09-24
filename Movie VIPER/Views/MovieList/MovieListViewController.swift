@@ -31,16 +31,12 @@ class MovieListViewController: UIViewController, MovieListViewProtocol {
         tableView.register(uinib, forCellReuseIdentifier: Identifier)
         tableView.delegate = self
         tableView.dataSource = self
-        presenter?.fetchMovies(for: "\(genre!.id)", in: page)
+        
+        presenter?.fetchMovies(for: "\(genre?.id ?? -1)", in: page)
     }
 
     func reloadMovies(data: [MovieEntity]) {
-        if moviesList.isEmpty {
-            moviesList = data
-        } else {
-            moviesList += data
-        }
-        
+        moviesList = data
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -69,7 +65,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         
         if offsetY > contentHeight - (2*height) {
             page += 1
-            presenter?.fetchMovies(for: "\(genre!.id)", in: page)
+            presenter?.fetchMovies(for: "\(genre?.id ?? -1)", in: page)
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

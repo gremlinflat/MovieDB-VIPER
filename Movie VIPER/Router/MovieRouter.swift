@@ -25,7 +25,7 @@ class MovieRouter: RouterProtocol {
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func navigateToMovieDetail(for movie: String, id: String,  with presenter: PresenterProtocol) {
+    func navigateToMovieDetail(for movie: String, id: String, with presenter: PresenterProtocol) {
         let vc = UIStoryboard.init(name: "DetailMovie", bundle: nil).instantiateViewController(withIdentifier: "DetailMovieScene") as! DetailMovieViewController
         vc.presenter = presenter
         vc.presenter?.viewPresented = vc
@@ -33,6 +33,4 @@ class MovieRouter: RouterProtocol {
         vc.title = movie
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
 }

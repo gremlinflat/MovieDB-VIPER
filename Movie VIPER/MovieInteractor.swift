@@ -27,16 +27,19 @@ class MovieInteractor: InteractorProtocol {
                     fatalError()
                 }
             }
-        case .movieList(let genre, let page):
-            networkManager.getMovieList(genre: genre, page: page) { [weak self] result in
+            
+        case .movieList(let genreId, let page):
+            networkManager.getMovieList(genreId: genreId, page: page) { [weak self] result in
                 guard let self = self else { return }
+                
                 switch result {
                 case .success(let movies):
                     self.presenter?.receiveData(data: movies)
-                case .failure():
+                case .failure(_):
                     fatalError()
                 }
             }
+            
         case .movieDetails(let movieId):
             networkManager.getMovieDetail(id: movieId) { [weak self] result in
                 guard let self = self else { return }
@@ -44,13 +47,20 @@ class MovieInteractor: InteractorProtocol {
                 switch result {
                 case .success(let movie):
                     self.presenter?.receiveData(data: movie)
-                case .failure(_):
-                    fatalError()
+                case .failure(let error):
+                    fatalError(error.rawValue)
                 }
             }
-            break
-        case .movieVideo(_):
-            fatalError()
+        case .movieTrailer(let movieId):
+            networkManager.getMovieTrailer(movieId: movieId) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let key):
+                    self.presenter?.receiveData(data: key)
+                case .failure(let error):
+                    fatalError(error.rawValue)
+                }
+            }
         }
     }
 }

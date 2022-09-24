@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-struct GenreEntity: Codable {
+struct GenreEntity: Codable, Identifiable {
     let id: Int
     let name: String
     
