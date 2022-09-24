@@ -44,11 +44,12 @@ class NetworkManager {
             }
         }
     }
-    func getMovies(genre: String, page: Int, completion: @escaping (Result<[MovieEntity], NetworkError>) -> Void) {
+    func getMovieList(genre: String, page: Int, completion: @escaping (Result<[MovieEntity], NetworkError>) -> Void) {
         
         let endpoint = EndPointFactory.shared
         
         let url: String = endpoint.configure(for: .movieList(genre, page))
+        
         self.request(for: url) { data, response, error in
             
             if let _ = error {
@@ -76,7 +77,7 @@ class NetworkManager {
         }
     }
     
-    func getMovie(id: String, completion: @escaping (Result<MovieEntity, NetworkError>) -> Void) {
+    func getMovieDetail(id: String, completion: @escaping (Result<MovieEntity, NetworkError>) -> Void) {
         let endpoint = EndPointFactory.shared
         
         let url: String = endpoint.configure(for: .movieDetails(id))

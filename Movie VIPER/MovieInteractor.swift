@@ -8,9 +8,14 @@
 import Foundation
 
 class MovieInteractor: InteractorProtocol {
+    
+    var presenter: PresenterProtocol?
+    var networkManager: NetworkManager = NetworkManager.shared
+    
+    
     func reFetchData(kind endpoint: EndPoints) {
+        
         switch endpoint {
-            
         case .genre:
             networkManager.getGenres { [weak self] result in
                 guard let self = self else { return }
@@ -23,9 +28,8 @@ class MovieInteractor: InteractorProtocol {
                 }
             }
         case .movieList(let genre, let page):
-            networkManager.getMovies(genre: genre, page: page) { [weak self] result in
+            networkManager.getMovieList(genre: genre, page: page) { [weak self] result in
                 guard let self = self else { return }
-                
                 switch result {
                 case .success(let movies):
                     self.presenter?.receiveData(data: movies)
@@ -33,23 +37,20 @@ class MovieInteractor: InteractorProtocol {
                     fatalError()
                 }
             }
-        case .movieDetails(let id):
-//            networkManager.getMovie(id: id) { [weak self] result in
-//                guard let self = self else { return }
-//
-//                switch result {
-//                case .success(let movie):
-//                    self.presenter?.receiveData(data: movie)
-//                case .failure(_):
-//                    fatalError()
-//                }
-//            }
-            fatalError()
+        case .movieDetails(let movieId):
+            networkManager.getMovieDetail(id: movieId) { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success(let movie):
+                    self.presenter?.receiveData(data: movie)
+                case .failure(_):
+                    fatalError()
+                }
+            }
+            break
         case .movieVideo(_):
             fatalError()
         }
     }
-    
-    var presenter: PresenterProtocol?
-    var networkManager: NetworkManager = NetworkManager.shared
 }

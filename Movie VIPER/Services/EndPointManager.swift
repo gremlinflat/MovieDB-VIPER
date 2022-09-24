@@ -40,8 +40,8 @@ class EndPointFactory {
                 "page" : "\(page)"
             ]
             
-        case .movieDetails(let id):
-            path = "/discover/movie/\(id)"
+        case .movieDetails(let ytID):
+            path = "/discover/movie/\(ytID)"
             args = [
                 "language" : "en-US"
             ]
