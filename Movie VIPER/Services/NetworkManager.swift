@@ -44,7 +44,7 @@ class NetworkManager {
             }
         }
     }
-    func getMovies(for genre: String, in page: Int, completion: @escaping (Result<[MovieEntity], NetworkError>) -> Void) {
+    func getMovies(genre: String, page: Int, completion: @escaping (Result<[MovieEntity], NetworkError>) -> Void) {
         
         let endpoint = EndPointFactory.shared
         
@@ -70,6 +70,35 @@ class NetworkManager {
                 })
                 
                 completion(.success(movies))
+            } catch {
+                completion(.failure(.decodingFailed))
+            }
+        }
+    }
+    
+    func getMovie(id: String, completion: @escaping (Result<MovieEntity, NetworkError>) -> Void) {
+        let endpoint = EndPointFactory.shared
+        
+        let url: String = endpoint.configure(for: .movieDetails(id))
+        
+        self.request(for: url) { data, response, error in
+            
+            if let _ = error {
+                completion(.failure(.missingUrl))
+                return
+            }
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            do {
+                let decode = try JSON(data: data!)
+                print(decode)
+//                var movies: MovieEntity =
+//                let items = decode["results"].array
+//                prin
+//                completion(.success(movies))
             } catch {
                 completion(.failure(.decodingFailed))
             }

@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="47" width="390" height="763"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MovieCell" rowHeight="170" id="c58-a0-fqS" customClass="MovieListTableViewCell" customModule="Movie_VIPER" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MovieList" rowHeight="170" id="c58-a0-fqS" customClass="MovieListTableViewCell" customModule="Movie_VIPER" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="390" height="170"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c58-a0-fqS" id="7sO-1h-Z6n">
@@ -50,6 +50,15 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xa-EJ-8M4">
+                                                    <rect key="frame" x="191" y="52.333333333333336" width="163" height="20.333333333333336"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20.333333333333336" id="Hk5-Wm-v3j"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="92.4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Mt-1r-KhG">
                                                     <rect key="frame" x="144" y="52.333333333333336" width="37" height="20.333333333333336"/>
                                                     <color key="backgroundColor" systemColor="systemYellowColor"/>
@@ -59,15 +68,6 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <color key="highlightedColor" systemColor="labelColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xa-EJ-8M4">
-                                                    <rect key="frame" x="191" y="52.333333333333336" width="163" height="20.333333333333336"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="20.333333333333336" id="Hk5-Wm-v3j"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="18"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -94,7 +94,7 @@
                                             <outlet property="moviePoster" destination="jrn-rm-Fue" id="eqf-Az-4hT"/>
                                             <outlet property="movieScore" destination="8Mt-1r-KhG" id="jDJ-X7-Ytd"/>
                                             <outlet property="movieTitle" destination="Vgk-p3-7A8" id="YMa-C7-65Z"/>
-                                            <outlet property="movieYear" destination="8Mt-1r-KhG" id="bWT-tE-Vwo"/>
+                                            <outlet property="movieYear" destination="1xa-EJ-8M4" id="2nf-KF-CtY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

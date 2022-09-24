@@ -27,18 +27,18 @@ protocol PresenterProtocol: AnyObject {
     var interactor: InteractorProtocol { get set }
     var route: RouterProtocol { get set }
     
+    func receiveData<T>(data: T)
     
     func fetchGenres()
+
     func fetchMovies(for genre: String, in page: Int)
-//    func addingNewMonster()
-//    func presentListOfMonsters(monsterType: MonsterType?)
-//    func presentDetailOfMonsters(isDetail: Bool, monsterId: Monster?)
-//    func requestListOfMonsters()
+    
+    func fetchMovies(id: String)
 }
 
 protocol RouterProtocol: AnyObject {
     func navigateToMovieList(in genre: GenreEntity, with presenter: PresenterProtocol)
-    func navigateToMovieDetail(for id: String, with presenter: PresenterProtocol)
+    func navigateToMovieDetail(for movie: String, id: String, with presenter: PresenterProtocol)
 }
 
 // MARK: Communication adapter
@@ -46,6 +46,7 @@ protocol GenreViewProtocol: ViewProtocol {
     func reloadGenres(data: [GenreEntity])
 }
 
-protocol MovieListProtocol: ViewProtocol {
+protocol MovieListViewProtocol: ViewProtocol {
     func reloadMovies(data: [MovieEntity])
 }
+

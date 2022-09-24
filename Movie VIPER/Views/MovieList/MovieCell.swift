@@ -1,5 +1,5 @@
 //
-//  MovieListTableViewCell.swift
+//  MovieListsTableViewCell.swift
 //  Movie VIPER
 //
 //  Created by Fahri Novaldi on 24/09/22.
@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class MovieListTableViewCell: UITableViewCell {
+class MovieCell: UITableViewCell {
     
     @IBOutlet weak var moviePoster: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
@@ -20,9 +20,8 @@ class MovieListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         setupUI()
-        print("this is tvc")
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -40,6 +39,17 @@ class MovieListTableViewCell: UITableViewCell {
         movieOverview.text = movieEntity.overview
         
         let endpoint = EndPointFactory.shared.getImageURL(imgPath: movieEntity.posterPath!)
-        moviePoster.kf.setImage(with: URL(string: endpoint))
+        let url = URL(string: endpoint)
+        let processor = DownsamplingImageProcessor(size: moviePoster.bounds.size)
+                     |> RoundCornerImageProcessor(cornerRadius: 20)
+        moviePoster.kf.indicatorType = .activity
+        moviePoster.kf.setImage(
+            with: url,
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
     }
 }

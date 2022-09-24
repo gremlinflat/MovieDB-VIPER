@@ -7,7 +7,10 @@
 
 import UIKit
 
-class DetailMovieViewController: UIViewController {
+class DetailMovieViewController: UIViewController, ViewProtocol {
+    var presenter: PresenterProtocol?
+    var id: String = ""
+    
     @IBOutlet weak var moviebanner: UIImageView!
     @IBOutlet weak var movieposter: UIImageView!
     @IBOutlet weak var movietitle: UILabel!

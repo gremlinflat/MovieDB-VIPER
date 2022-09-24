@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieListViewController: UIViewController, MovieListProtocol {
+class MovieListViewController: UIViewController, MovieListViewProtocol {
     
     var presenter: PresenterProtocol?
     
@@ -18,7 +18,7 @@ class MovieListViewController: UIViewController, MovieListProtocol {
     var moviesList: [MovieEntity] = []
     var page: Int = 1
     
-    let cellIdentifier = "MovieCell"
+    let Identifier = "MovieCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,17 +26,21 @@ class MovieListViewController: UIViewController, MovieListProtocol {
         title = genre?.name
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        tableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        
-        
+//        tableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: Identifier)
+        let uinib = UINib(nibName: Identifier, bundle: nil)
+        tableView.register(uinib, forCellReuseIdentifier: Identifier)
         tableView.delegate = self
         tableView.dataSource = self
         presenter?.fetchMovies(for: "\(genre!.id)", in: page)
     }
 
     func reloadMovies(data: [MovieEntity]) {
-        print("masuk")
-        moviesList = data
+        if moviesList.isEmpty {
+            moviesList = data
+        } else {
+            moviesList += data
+        }
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -50,13 +54,25 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MovieListTableViewCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifier, for: indexPath) as! MovieCell
+        cell.populate(movieEntity: moviesList[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 170
     }
-    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - (2*height) {
+            page += 1
+            presenter?.fetchMovies(for: "\(genre!.id)", in: page)
+        }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.route.navigateToMovieDetail(for: moviesList[indexPath.row].title, id: "\(moviesList[indexPath.row].id)", with: presenter!)
+    }
 }
