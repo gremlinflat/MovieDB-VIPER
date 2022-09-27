@@ -38,7 +38,7 @@ class MovieListViewController: UIViewController, MovieListViewProtocol {
     }
 
     func reloadMovies(data: [MovieEntity]) {
-        moviesList = data
+        moviesList.append(contentsOf: data)
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
